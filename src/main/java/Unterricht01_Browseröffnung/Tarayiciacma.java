@@ -6,9 +6,10 @@ public class Tarayiciacma {
 
     public static void main(String[] args) {
 
-         Playwright playwright = Playwright.create();
+            Playwright playwright = Playwright.create();
             Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
             Page page = browser.newPage();
+
             page.navigate("https://demoqa.com/");
             System.out.println(page.title());
             System.out.println(page.content());
