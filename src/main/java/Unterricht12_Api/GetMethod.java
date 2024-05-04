@@ -8,6 +8,7 @@ import org.junit.jupiter.api.*;
 import com.microsoft.playwright.APIRequest;
 import com.microsoft.playwright.APIRequestContext;
 import org.testng.Assert;
+import org.testng.annotations.AfterTest;
 
 import java.io.IOException;
 
@@ -26,15 +27,12 @@ public class GetMethod {
     void createAPIRequestContext() {
 
          apiRequestContext=playwright.request().newContext(new APIRequest.NewContextOptions());
-
     }
-
 
     @BeforeAll
     void beforeAll() {
         createPlaywright();
         createAPIRequestContext();
-
     }
 
     void disposeAPIRequestContext() {
@@ -49,7 +47,6 @@ public class GetMethod {
             playwright = null;
         }
     }
-
 
     @AfterAll
     void afterAll() {
@@ -79,5 +76,9 @@ public class GetMethod {
 
     }
 
+    @AfterTest
+    public void tearDown(){
+        playwright.close();
+    }
 
 }
