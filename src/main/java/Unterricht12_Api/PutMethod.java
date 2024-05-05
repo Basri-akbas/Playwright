@@ -61,7 +61,7 @@ public class PutMethod {
         //create users object: using builder pattern:
         Map<String,String > user=new HashMap<>();
         user.put("name","hasanbasri");
-        user.put("email","hasanbasri22@gmail.com");
+        user.put("email","hasanbasri20@gmail.com");
         user.put("gender","male");
         user.put("status","active");
 
@@ -114,7 +114,7 @@ public class PutMethod {
         System.out.println("update user : " + putResponseText);
 
         JsonNode jsonResponse1 = objectMapper.readTree(apiPUTResponse.body());
-        System.out.println("Status güncellendi---------------> "+jsonResponse1.get("status").asText());
+        System.out.println("Status updated---------------> "+jsonResponse1.get("status").asText());
         Assert.assertEquals(jsonResponse1.get("status").asText(), user.get("status"));
         Assert.assertEquals(jsonResponse1.get("name").asText(), user.get("name"));
 
@@ -141,6 +141,18 @@ public class PutMethod {
         Assert.assertEquals(jsonResponse2.get("id").asText(), userId);
         Assert.assertEquals(jsonResponse2.get("status").asText(), user.get("status"));
         Assert.assertEquals(jsonResponse2.get("name").asText(), user.get("name"));
+
+        //Delete user
+        APIResponse apiDeleteResponse=apiRequestContext.delete("https://gorest.co.in/public/v2/users/"+userId);
+
+        System.out.println("---------------Delete User-------------------------");
+        System.out.println(apiDeleteResponse.status());
+        System.out.println(apiDeleteResponse.statusText());
+
+        Assert.assertEquals(apiDeleteResponse.status(), 404);
+
+        System.out.println("delete user response body ====" + apiDeleteResponse.text());
+
 
     }
 
